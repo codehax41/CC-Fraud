@@ -26,6 +26,9 @@ jobs:
     - name: Run model training
       run: python src/model.py
 
+    - name: Debug - Check Generated Files
+      run: ls -R models artifacts || echo "No files found!"
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
