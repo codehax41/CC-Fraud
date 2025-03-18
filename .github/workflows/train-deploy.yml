@@ -56,7 +56,6 @@ jobs:
         # Add and commit model
         git add models/logistic_regression_model.pkl
         git add artifacts/classification_report.jpeg
-        git add artifacts/heatmap.jpeg
         git commit -m "Update model: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "No changes to commit"
     
         # Push changes
