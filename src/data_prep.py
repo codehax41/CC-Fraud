@@ -48,7 +48,7 @@ def plot_heatmap(df, file_path):
     df (DataFrame): The input DataFrame to plot the heatmap.
     file_path (str): The path to save the heatmap image.
     """
-    file_path = '../artifacts/heatmap.jpeg'
+    file_path = 'artifacts/heatmap.jpeg'
     plt.figure(figsize=(16, 9))
     sns.heatmap(df.corr(), annot=True)
     plt.savefig(file_path)
@@ -56,16 +56,16 @@ def plot_heatmap(df, file_path):
 
 # Example usage:
 # Load the data
-data_path = '../data/raw_data/creditcard.csv'
+data_path = 'data/raw_data/creditcard.csv'
 df = pd.read_csv(data_path)
 
 # Preprocess the data
 downsampled_df = preprocess_data(df)
 
 # Save the processed data
-processed_data_path = '../data/processed/processed_data.csv'
+processed_data_path = 'data/processed/processed_data.csv'
 save_processed_data(df, processed_data_path)
 
 # Plot and save the heatmap
-heatmap_path = '../artifacts/heatmap.jpeg'
+heatmap_path = 'artifacts/heatmap.jpeg'
 plot_heatmap(downsampled_df, heatmap_path)
