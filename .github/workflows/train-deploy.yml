@@ -53,7 +53,7 @@ jobs:
       with:
         name: training-results
         path: |
-          logistic_regression_model.pkl
-          classification_report.jpeg
-          heatmap.jpeg
+          cat models/logistic_regression_model.pkl
+          cat artifacts/classification_report.jpeg
+          cat artifacts/heatmap.jpeg
         overwrite: true
