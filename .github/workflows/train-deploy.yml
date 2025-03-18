@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 permissions: 
-  contents: write  # Required for artifact deletion
+  contents: write
 
 jobs:
   train-model:
@@ -26,8 +26,6 @@ jobs:
       run: |
         python -m venv venv
         source venv/bin/activate
-        echo "VIRTUAL_ENV=venv" >> $GITHUB_ENV
-        echo "source venv/bin/activate" >> ~/.bashrc
 
     - name: Install dependencies
       run: |
@@ -40,15 +38,12 @@ jobs:
         source venv/bin/activate
         python src/model.py
 
-    - name: Debug - Check Generated Files
-      run: ls -R models artifacts || echo "No files found!"
-
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: training-results
         path: |
-          cat logistic_regression_model.pkl
-          cat classification_report.jpeg
-          cat heatmap.jpeg
+          cat models/logistic_regression_model.pkl
+          cat artifacts/classification_report.jpeg
+          cat artifacts/heatmap.jpeg
         overwrite: true
