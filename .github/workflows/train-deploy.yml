@@ -19,12 +19,23 @@ jobs:
       with:
         python-version: "3.10"
 
+    - name: Create and activate virtual environment
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        echo "VIRTUAL_ENV=venv" >> $GITHUB_ENV
+        echo "source venv/bin/activate" >> ~/.bashrc
+
     - name: Install dependencies
       run: |
+        source venv/bin/activate
+        python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
 
     - name: Run model training
-      run: python src/model.py
+      run: |
+        source venv/bin/activate
+        python src/model.py
 
     - name: Debug - Check Generated Files
       run: ls -R models artifacts || echo "No files found!"
