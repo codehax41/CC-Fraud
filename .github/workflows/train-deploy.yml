@@ -21,20 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Create directories (if needed)
-      run: |
-        mkdir -p models artifacts
+        python -m pip install -r requirements.txt
 
     - name: Run model training
       run: python train_model.py
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: training-results
-        path: |
-          models/
-          artifacts/
