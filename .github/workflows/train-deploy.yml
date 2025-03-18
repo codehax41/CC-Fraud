@@ -15,7 +15,7 @@ jobs:
     permissions:
       contents: write  # Needed to push changes
       packages: write
-      action: write
+      actions: write
 
     steps:
     - name: Checkout repository
@@ -41,6 +41,7 @@ jobs:
       run: |
         source venv/bin/activate
         python src/model.py
+        echo "Current directory: $(pwd)"
 
     - name: Commit and push updated model
       run: |
