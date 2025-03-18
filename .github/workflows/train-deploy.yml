@@ -25,3 +25,11 @@ jobs:
 
     - name: Run model training
       run: python src/model.py
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: training-results
+        path: |
+          src/models/
+          artifacts/
