@@ -51,3 +51,4 @@ jobs:
           models/logistic_regression_model.pkl
           artifacts/classification_report.jpeg
           artifacts/heatmap.jpeg
+        overwrite: true
