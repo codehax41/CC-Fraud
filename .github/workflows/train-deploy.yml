@@ -24,4 +24,4 @@ jobs:
         python -m pip install -r requirements.txt
 
     - name: Run model training
-      run: python train_model.py
+      run: python src/model.py
