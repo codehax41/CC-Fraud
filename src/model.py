@@ -133,14 +133,16 @@ def plot_confusion_matrix(y_true, y_pred):
 
 # Example usage:
 # Load the processed data
-processed_data_path = 'data/processed/processed_data.csv'
+processed_data_path = '../data/processed/processed_data.csv'
 df = load_processed_data(processed_data_path)
+print("Data Loaded!")
 
 # Prepare the training and testing data
 X_train_downsampled, y_train_downsampled, X_test_orig, y_test_orig = prepare_training_data(df)
 
 # Train the logistic regression model
 log_reg = train_logistic_regression(X_train_downsampled, y_train_downsampled)
+print("Model Trained!")
 
 # Predict on the original test data
 y_pred = log_reg.predict(X_test_orig)
@@ -149,8 +151,9 @@ y_pred = log_reg.predict(X_test_orig)
 plot_confusion_matrix(y_test_orig, y_pred)
 
 # Save the model
-save_model(log_reg, 'models', 'logistic_regression_model.pkl')
+save_model(log_reg, '../models', 'logistic_regression_model.pkl')
 
 # Save the classification report as an image
-classification_report_path = 'artifacts/classification_report.jpeg'
+classification_report_path = '../artifacts/classification_report.jpeg'
 save_classification_report(y_test_orig, y_pred, classification_report_path)
+print("Report Saved!")
