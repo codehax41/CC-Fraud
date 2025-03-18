@@ -37,7 +37,7 @@ jobs:
 
     - name: Ensure directories exist
       run: |
-        mkdir -p models artifacts
+        mkdir -p models1 artifacts1
 
     - name: Run model training
       run: |
@@ -45,13 +45,13 @@ jobs:
         python src/model.py
 
     - name: Debug - Check Generated Files
-      run: ls -R models artifacts || echo "No files found!"
+      run: ls -R models1 artifacts1 || echo "No files found!"
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: training-results
         path: |
-          models/logistic_regression_model.pkl
-          artifacts/classification_report.jpeg
-          artifacts/heatmap.jpeg
+          models1/logistic_regression_model.pkl
+          artifacts1/classification_report.jpeg
+          artifacts1/heatmap.jpeg
