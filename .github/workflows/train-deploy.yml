@@ -27,18 +27,6 @@ jobs:
         rm -rf models/*
         rm -rf artifacts/*
 
-    - name: Delete existing GitHub artifact
-      run: |
-        ARTIFACT_ID=$(gh api repos/${{ github.repository }}/actions/artifacts --jq '.artifacts[] | select(.name=="training-results") | .id')
-        if [ -n "$ARTIFACT_ID" ]; then
-          gh api -X DELETE repos/${{ github.repository }}/actions/artifacts/$ARTIFACT_ID
-          echo "Deleted old artifact ID: $ARTIFACT_ID"
-        else
-          echo "No existing artifact found."
-        fi
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Create and activate virtual environment
       run: |
         python -m venv venv
@@ -68,4 +56,4 @@ jobs:
           models/logistic_regression_model.pkl
           artifacts/classification_report.jpeg
           artifacts/heatmap.jpeg
-        if-no-files-found: ignore
+        overwrite: true
