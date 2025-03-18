@@ -35,23 +35,19 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
 
-    - name: Ensure directories exist
-      run: |
-        mkdir -p models1 artifacts1
-
     - name: Run model training
       run: |
         source venv/bin/activate
         python src/model.py
 
     - name: Debug - Check Generated Files
-      run: ls -R models1 artifacts1 || echo "No files found!"
+      run: ls -R models artifacts || echo "No files found!"
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: training-results
         path: |
-          models1/logistic_regression_model.pkl
-          artifacts1/classification_report.jpeg
-          artifacts1/heatmap.jpeg
+          models/logistic_regression_model.pkl
+          artifacts/classification_report.jpeg
+          artifacts/heatmap.jpeg
