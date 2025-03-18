@@ -44,8 +44,8 @@ jobs:
     - name: Commit and push updated model
       run: |
         # Configure git (essential for CI environments)
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
+        git config --global user.name "codehax41"
+        git config --global user.email "ramsundar.1238@gmail.com"
     
         # Checkout main branch (if not already done)
         git checkout main
@@ -55,6 +55,8 @@ jobs:
     
         # Add and commit model
         git add models/logistic_regression_model.pkl
+        git add artifacts/classification_report.jpeg
+        git add artifacts/heatmap.jpeg
         git commit -m "Update model: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "No changes to commit"
     
         # Push changes
