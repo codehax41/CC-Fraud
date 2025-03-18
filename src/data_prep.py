@@ -63,9 +63,9 @@ df = pd.read_csv(data_path)
 downsampled_df = preprocess_data(df)
 
 # Save the processed data
-processed_data_path = 'data/processed/processed_data.csv'
+processed_data_path = '../data/processed/processed_data.csv'
 save_processed_data(df, processed_data_path)
 
 # Plot and save the heatmap
-heatmap_path = 'artifacts/heatmap.jpeg'
+heatmap_path = '../artifacts/heatmap.jpeg'
 plot_heatmap(downsampled_df, heatmap_path)
