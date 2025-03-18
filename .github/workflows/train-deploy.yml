@@ -53,7 +53,7 @@ jobs:
       with:
         name: training-results
         path: |
-          home/runner/work/CC-Fraud/CC-Fraud/models/logistic_regression_model.pkl
-          /home/runner/work/CC-Fraud/CC-Fraud/classification_report.jpeg
+          /home/runner/work/CC-Fraud/CC-Fraud/models/logistic_regression_model.pkl
+          /home/runner/work/CC-Fraud/CC-Fraud/artifacts/classification_report.jpeg
           /home/runner/work/CC-Fraud/CC-Fraud/artifacts/heatmap.jpeg
         overwrite: true
