@@ -10,10 +10,6 @@ model_path = "models/logistic_regression_model.pkl"
 with open(model_path, "rb") as model_file:
     model = pickle.load(model_file)
 
-# Image paths
-classification_report_img = "artifacts/classification_report.jpeg"
-heatmap_img = "artifacts/heatmap.jpeg"
-
 # App Title
 st.title("💳 Welcome to CC Fraud Detection Platform")
 
@@ -67,7 +63,3 @@ if predict_button:
 
         # Display result
         st.success(f"📝 Prediction: **{result}**")
-        
-        # Show classification report and heatmap images
-        st.image(Image.open(classification_report_img), caption="Classification Report", use_column_width=True)
-        st.image(Image.open(heatmap_img), caption="Feature Correlation Heatmap", use_column_width=True)
