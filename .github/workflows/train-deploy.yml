@@ -1,50 +1,40 @@
-name: Train and Deploy Model
+name: Model Training Pipeline
 
 on:
   push:
-    branches:
-      - main  # Change if your main branch has a different name
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
-  train-and-deploy:
+  train-model:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      # Step 2: Set up Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      # Step 4: Run model training script
-      - name: Run model training
-        run: |
-          python src/model.py  # Ensure this script exists and is correctly implemented
+    - name: Create directories (if needed)
+      run: |
+        mkdir -p models artifacts
 
-      # Step 5: Upload the trained model as an artifact
-      - name: Upload trained model
-        uses: actions/upload-artifact@v3
-        with:
-          name: logistic_regression_model
-          path: models/logistic_regression_model.pkl  # Ensure this path is correct
+    - name: Run model training
+      run: python train_model.py
 
-      # Step 6: Deploy the Streamlit app to Azure
-      - name: Deploy Streamlit App to Azure
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: "cc-fraud-detection"  # Change this to your Azure Web App name
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: training-results
+        path: |
+          models/
+          artifacts/
