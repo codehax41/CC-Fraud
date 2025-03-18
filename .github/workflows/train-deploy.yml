@@ -1,0 +1,43 @@
+name: Train and Deploy Model
+
+on:
+  push:
+    branches:
+      - main  # Change if your main branch has a different name
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  train-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run model training
+        run: |
+          python src/model.py  # Runs your training script
+
+      - name: Upload trained model
+        uses: actions/upload-artifact@v3
+        with:
+          name: logistic_regression_model
+          path: models/logistic_regression_model.pkl
+
+      - name: Deploy Streamlit App to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "cc-fraud-detection"  # Change this to your Azure Web App name
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
