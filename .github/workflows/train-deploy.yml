@@ -15,6 +15,7 @@ jobs:
     permissions:
       contents: write  # Needed to push changes
       packages: write
+      action: write
 
     steps:
     - name: Checkout repository
@@ -46,20 +47,12 @@ jobs:
         # Configure git (essential for CI environments)
         git config --global user.name "codehax41"
         git config --global user.email "ramsundar.1238@gmail.com"
-    
-        # Checkout main branch (if not already done)
-        git checkout main
-    
-        # Pull latest changes (avoid conflicts)
-        git pull origin main
-    
-        # Add and commit model
         git add models/logistic_regression_model.pkl
         git add artifacts/classification_report.jpeg
-        git commit -m "Update model: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "No changes to commit"
-    
-        # Push changes
+        git commit -m "Model update: $(date -u +'%Y-%m-%dT%H:%M:%SZ')" || exit 0
+        git pull --rebase origin main
         git push origin main
+
       env:
         # Needed for authentication
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
