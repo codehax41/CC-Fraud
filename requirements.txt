@@ -1,0 +1,11 @@
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+xgboost
+streamlit
+imbalanced-learn
+lazypredict
+pickle
+pillow
