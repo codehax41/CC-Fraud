@@ -31,5 +31,6 @@ jobs:
       with:
         name: training-results
         path: |
-          src/models/
-          artifacts/
+          models/logistic_regression_model.pkl
+          artifacts/classification_report.jpeg
+          artifacts/heatmap.jpeg
