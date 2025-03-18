@@ -5,9 +5,9 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    
+
 permissions: 
-  contents: write
+  contents: write  # 🔥 Grants write access to upload artifacts
 
 jobs:
   train-model:
@@ -34,6 +34,10 @@ jobs:
         source venv/bin/activate
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
+
+    - name: Ensure directories exist
+      run: |
+        mkdir -p models artifacts
 
     - name: Run model training
       run: |
